@@ -26,7 +26,7 @@ const LeaveRequests = () => {
         try {
             await axios.put(`/faculty/leaves/${id}`, { status });
             fetchLeaves(); // refresh
-        } catch (error) {
+        } catch {
             console.error('Failed to update leave string');
         }
     };

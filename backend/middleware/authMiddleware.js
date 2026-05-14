@@ -1,13 +1,14 @@
 const jwt = require('jsonwebtoken');
 const prisma = require('../db');
 const { serializeUser } = require('../utils/serializers');
+const { getJwtSecret } = require('../utils/jwt');
 
 const protect = async (req, res, next) => {
     let token = req.cookies.jwt;
 
     if (token) {
         try {
-            const decoded = jwt.verify(token, process.env.JWT_SECRET || 'supersecret123');
+            const decoded = jwt.verify(token, getJwtSecret());
 
             const user = await prisma.users.findUnique({
                 where: { id: decoded.userId },

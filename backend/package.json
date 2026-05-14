@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "build": "prisma generate",
     "dev": "nodemon server.js",
+    "postinstall": "prisma generate",
     "start": "node server.js"
   },
   "keywords": [],

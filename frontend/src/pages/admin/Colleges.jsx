@@ -18,7 +18,7 @@ const ManageColleges = () => {
         try {
             const { data } = await axios.get('/admin/colleges');
             setColleges(data);
-        } catch (error) {
+        } catch {
             console.error('Failed to fetch colleges');
         } finally {
             setLoading(false);

@@ -9,9 +9,9 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // Configure axios to always send cookies and use the Vite proxy
+    // Configure axios to always send cookies and use the configured API.
     axios.defaults.withCredentials = true;
-    axios.defaults.baseURL = '/api';
+    axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL || '/api';
 
     useEffect(() => {
         checkUserLoggedIn();
@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
         try {
             const { data } = await axios.get('/auth/me');
             setUser(data);
-        } catch (error) {
+        } catch {
             setUser(null);
         } finally {
             setLoading(false);

@@ -145,15 +145,18 @@ const Landing = () => {
                         <h2 className="mt-2 text-3xl font-bold">Everything academic teams need in one workspace</h2>
                     </div>
                     <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                        {features.map(({ icon: Icon, title, text }) => (
-                            <div key={title} className="group rounded-lg border border-blue-100 bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-primary-500 hover:shadow-lg">
-                                <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
-                                    <Icon size={22} />
+                        {features.map(({ icon, title, text }) => {
+                            const Icon = icon;
+                            return (
+                                <div key={title} className="group rounded-lg border border-blue-100 bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-primary-500 hover:shadow-lg">
+                                    <div className="flex h-11 w-11 items-center justify-center rounded-lg bg-primary-50 text-primary-600">
+                                        <Icon size={22} />
+                                    </div>
+                                    <h3 className="mt-5 text-lg font-semibold">{title}</h3>
+                                    <p className="mt-2 text-sm leading-6 text-slate-600">{text}</p>
                                 </div>
-                                <h3 className="mt-5 text-lg font-semibold">{title}</h3>
-                                <p className="mt-2 text-sm leading-6 text-slate-600">{text}</p>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </section>
 
@@ -167,13 +170,16 @@ const Landing = () => {
                             <Link to="/login" className="btn-primary w-fit">Select Role</Link>
                         </div>
                         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                            {roles.map(({ icon: Icon, title, text }) => (
-                                <Link key={title} to="/login" className="rounded-lg border border-blue-100 bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-primary-500 hover:shadow-lg">
-                                    <Icon className="text-primary-600" size={28} />
-                                    <h3 className="mt-5 text-lg font-semibold">{title}</h3>
-                                    <p className="mt-2 text-sm leading-6 text-slate-600">{text}</p>
-                                </Link>
-                            ))}
+                            {roles.map(({ icon, title, text }) => {
+                                const Icon = icon;
+                                return (
+                                    <Link key={title} to="/login" className="rounded-lg border border-blue-100 bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-primary-500 hover:shadow-lg">
+                                        <Icon className="text-primary-600" size={28} />
+                                        <h3 className="mt-5 text-lg font-semibold">{title}</h3>
+                                        <p className="mt-2 text-sm leading-6 text-slate-600">{text}</p>
+                                    </Link>
+                                );
+                            })}
                         </div>
                     </div>
                 </section>

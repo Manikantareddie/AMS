@@ -15,18 +15,18 @@ const ManageCollegeAdmins = () => {
         collegeId: ''
     });
 
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = async () => {
+    async function fetchData() {
         const [adminRes, collegeRes] = await Promise.all([
             axios.get('/admin/college-admins'),
             axios.get('/admin/colleges')
         ]);
         setAdmins(adminRes.data);
         setColleges(collegeRes.data);
-    };
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     const closeModal = () => {
         setIsModalOpen(false);

@@ -15,7 +15,7 @@ const MyAttendance = () => {
         try {
             const { data } = await axios.get('/student/attendance');
             setRecords(data);
-        } catch (error) {
+        } catch {
             console.error('Failed to fetch attendance');
         } finally {
             setLoading(false);

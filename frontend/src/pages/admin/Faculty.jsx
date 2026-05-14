@@ -32,7 +32,7 @@ const ManageFaculty = () => {
             ]);
             setFaculty(facRes.data);
             setDepartments(deptRes.data);
-        } catch (error) {
+        } catch {
             console.error('Failed to fetch data');
         } finally {
             setLoading(false);

@@ -164,19 +164,22 @@ const AdminDashboard = () => {
             </div>
 
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                {kpis.map(({ label, value, icon: Icon, tone, onClick }) => (
-                    <button key={label} type="button" onClick={onClick} disabled={!onClick} className="stat-card text-left transition hover:border-blue-300 hover:shadow-md disabled:cursor-default disabled:hover:border-blue-100 disabled:hover:shadow-sm">
-                        <div className="flex items-center justify-between gap-3">
-                            <div>
-                                <p className="text-xs font-medium text-slate-500 dark:text-slate-400">{label}</p>
-                                <p className="mt-1 text-2xl font-semibold text-slate-950 dark:text-white">{value}</p>
+                {kpis.map(({ label, value, icon, tone, onClick }) => {
+                    const Icon = icon;
+                    return (
+                        <button key={label} type="button" onClick={onClick} disabled={!onClick} className="stat-card text-left transition hover:border-blue-300 hover:shadow-md disabled:cursor-default disabled:hover:border-blue-100 disabled:hover:shadow-sm">
+                            <div className="flex items-center justify-between gap-3">
+                                <div>
+                                    <p className="text-xs font-medium text-slate-500 dark:text-slate-400">{label}</p>
+                                    <p className="mt-1 text-2xl font-semibold text-slate-950 dark:text-white">{value}</p>
+                                </div>
+                                <div className={`rounded-lg p-2.5 ${iconTones[tone]}`}>
+                                    <Icon size={19} />
+                                </div>
                             </div>
-                            <div className={`rounded-lg p-2.5 ${iconTones[tone]}`}>
-                                <Icon size={19} />
-                            </div>
-                        </div>
-                    </button>
-                ))}
+                        </button>
+                    );
+                })}
             </div>
 
             <div className="grid grid-cols-1 gap-3 md:grid-cols-4">

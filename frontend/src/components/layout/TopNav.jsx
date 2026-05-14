@@ -20,7 +20,9 @@ const pageLabels = {
 const TopNav = () => {
     const { user, refreshUser } = useAuth();
     const location = useLocation();
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(() => (
+        localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+    ));
     const [profileOpen, setProfileOpen] = useState(false);
     const [notificationOpen, setNotificationOpen] = useState(false);
     const [notifications, setNotifications] = useState([]);
@@ -40,19 +42,15 @@ const TopNav = () => {
     }
 
     useEffect(() => {
-        // Check local storage or system preference
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            setDarkMode(true);
+        if (darkMode) {
             document.documentElement.classList.add('dark');
         } else {
-            setDarkMode(false);
             document.documentElement.classList.remove('dark');
         }
-    }, []);
+    }, [darkMode]);
 
     useEffect(() => {
         if (!user) return;
-        setFormData({ name: user.name || '', email: user.email || '', phone: user.phone || '' });
         loadNotifications().catch(() => setNotifications([]));
     }, [user]);
 
@@ -64,6 +62,7 @@ const TopNav = () => {
 
     const openProfile = async () => {
         setMessage('');
+        setFormData({ name: user?.name || '', email: user?.email || '', phone: user?.phone || '' });
         setProfileOpen(true);
         await loadRequests();
     };

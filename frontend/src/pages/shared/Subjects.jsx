@@ -15,11 +15,7 @@ const ManageSubjects = () => {
     const [selectedSection, setSelectedSection] = useState(null);
     const [formData, setFormData] = useState({ name: '', classId: '', facultyId: '' });
 
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = async () => {
+    async function fetchData() {
         const [subjectRes, classRes, facultyRes] = await Promise.all([
             axios.get('/faculty/subjects'),
             axios.get('/faculty/classes'),
@@ -28,7 +24,11 @@ const ManageSubjects = () => {
         setSubjects(subjectRes.data);
         setClasses(classRes.data);
         setFaculty(facultyRes.data);
-    };
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     const openCreateModal = () => {
         setEditingSubject(null);

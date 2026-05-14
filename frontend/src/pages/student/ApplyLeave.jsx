@@ -24,14 +24,18 @@ const ApplyLeave = () => {
         try {
             const { data } = await axios.get('/student/leaves');
             setLeaves(data);
-        } catch (error) { }
+        } catch {
+            setMsg('Unable to load leave history.');
+        }
     };
 
     const fetchFaculty = async () => {
         try {
             const { data } = await axios.get('/student/faculty');
             setFacultyList(data);
-        } catch (error) { }
+        } catch {
+            setMsg('Unable to load faculty list.');
+        }
     };
 
     const handleSubmit = async (e) => {
@@ -43,7 +47,7 @@ const ApplyLeave = () => {
             setMsg('Leave application submitted successfully.');
             setFormData({ startDate: '', endDate: '', reason: '', facultyId: '' });
             fetchMyLeaves();
-        } catch (error) {
+        } catch {
             setMsg('Failed to submit application.');
         } finally {
             setLoading(false);

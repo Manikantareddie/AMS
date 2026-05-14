@@ -32,7 +32,7 @@ const ManageStudents = () => {
             ]);
             setStudents(stuRes.data);
             setClasses(classRes.data);
-        } catch (error) {
+        } catch {
             console.error('Failed to fetch data');
         } finally {
             setLoading(false);
